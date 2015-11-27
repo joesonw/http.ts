@@ -12,6 +12,5 @@
   "license": "ISC",
   "dependencies": {},
   "devDependencies": {
-    "babel": "^6.1.18"
   }
 }
