@@ -14,6 +14,7 @@ import Url from './Url';
 class Request {
 	private request:http.IncomingMessage;
 	
+	private extra:Map<any> = new Map<string>();
 	private headers:Map<string> = new Map<string>();
 	private httpVersion:string;
 	private httpMethod:HttpMethod = null;
@@ -82,6 +83,17 @@ class Request {
 		return this.url;
 	}
 	
+	getBody():string {
+		return this.body;
+	}
+	
+	setExtra(key:string, value:any) {
+		this.extra.set(key,value);
+	}
+	
+	getExtra(key:string):any {
+		return this.extra.get(key);
+	}
 	
 }
 

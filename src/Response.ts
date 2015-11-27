@@ -14,6 +14,7 @@ class Response {
 	private headers:Map<string> = new Map<string>();
 	private contentType:ContentType = ContentType.TEXT;
 	private flushed:boolean = false;
+	private extra:Map<any> = new Map<any>();
 	private response:http.ServerResponse;
 	
 	constructor(response:http.ServerResponse) {
@@ -74,6 +75,13 @@ class Response {
 				return 'text/plain';
 		}
 	}
+	setExtra(key:string, value:any) {
+		this.extra.set(key,value);
+	}
+	getExtra(key:string):any {
+		return this.extra.get(key);
+	}
+	
 }
 
 export default Response;

@@ -21,15 +21,19 @@ class App {
 	private serverHandler(req:http.IncomingMessage,res:http.ServerResponse) {
 		let buffer = '';
 		let self = this;
+		
+		let u = req.url;
 		req.on('data', chunk => buffer += chunk);
 		req.on('end', () => {
-			let u = req.url;
+			let response = new Response(res);
+			let found = false;
 			for (let route of self.routes) {
-				if (Url.match(u,route.getPath())) {
+				if (Url.match(u,route.getPath() + '/*')) {
 					let url = Url.parse(u,route.getPath());
 					let request = new Request(req, url, buffer);
 					let response = new Response(res);
-					route.handle(request, response)
+					
+					route.handle(req, response, buffer)
 						.then(() => {
 							response.flush();
 						})
@@ -37,10 +41,28 @@ class App {
 							console.error(err.message);
 							console.error(err.stack);
 						})
+					found = true;
+				} else if (Url.match(u,route.getPath())) {
+					let url = Url.parse(u,route.getPath());
+					let request = new Request(req, url, buffer);
+					let response = new Response(res);
+					
+					route.handle(req, response, buffer)
+						.then(() => {
+							response.flush();
+						})
+						.catch(err => {
+							console.error(err.message);
+							console.error(err.stack);
+						})
+					found = true;
 				}
 			}
+			if (!found) {
+				response.write('not found on app');
+				response.flush();
+			}
 		});
-		
 	}
 	
 	public listen(port:number,hostname?:string) {

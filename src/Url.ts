@@ -62,9 +62,9 @@ class Url {
 			}
 		}
 		let params:Map<any> = new Map<any>();
-		let result = re.exec(url);
+		let result = re.exec(path);
 		for (let i = 0; i < keys.length; i++) {
-			params.set(keys[i].name,result[i]);
+			params.set(keys[i].name,result[i + 1]);
 		}
 		let query:Map<any> = new Map<any>();
 		if (queryString) {
