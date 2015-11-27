@@ -1,12 +1,13 @@
-/// <reference path="../typings/node/node.d.ts"/>
+/// <reference path="../../typings/node/node.d.ts"/>
 import http = require('http');
 
-import HttpMethod from './HttpMethod';
+
+import HttpMethod from '../util/HttpMethod';
 import Request from './Request';
 import Response from './Response';
 import Url from './Url';
-import PreProcessor from './PreProcessor';
-import PostProcessor from './PostProcessor';
+import PreProcessor from '../processor/PreProcessor';
+import PostProcessor from '../processor/PostProcessor';
 
 
 abstract class RouteHandler {

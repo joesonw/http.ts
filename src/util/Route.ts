@@ -1,6 +1,5 @@
 import HttpMethod from './HttpMethod';
-import Decorator from './util/Decorator';
-import RouteHandler from './RouteHandler';
+import RouteHandler from '../entity/RouteHandler';
 
 export function Method(method:HttpMethod) {
 	return (target:RouteHandler, propertyKey:string, descriptor: TypedPropertyDescriptor<any>) => {

@@ -1,4 +1,4 @@
-import Request from './Request'
+import Request from '../entity/Request';
 
 abstract class PreProcessor {
 	constructor() {

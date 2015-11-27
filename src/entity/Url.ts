@@ -1,5 +1,5 @@
 
-import Map from './util/Map';
+import Map from '../util/Map';
 
 const PATH_REGEXP = new RegExp([
 	'(\\\\.)',

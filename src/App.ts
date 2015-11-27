@@ -1,12 +1,11 @@
 /// <reference path="../typings/node/node.d.ts"/>
-
-
 import http = require('http');
 
-import Request from './Request';
-import RouteHandler from './RouteHandler';
-import Url from './Url';
-import Response from './Response';
+
+import Request from './entity/Request';
+import RouteHandler from './entity/RouteHandler';
+import Url from './entity/Url';
+import Response from './entity/Response';
 
 /**
  * @class

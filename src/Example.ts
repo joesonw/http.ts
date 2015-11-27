@@ -1,14 +1,14 @@
 import App from './App';
-import HttpMethod from './HttpMethod';
-import * as Route from './Route';
+import HttpMethod from './util/HttpMethod';
+import * as Route from './util/Route';
 import Decorator from './util/Decorator';
-import RouteHandler from './RouteHandler';
+import RouteHandler from './entity/RouteHandler';
 import JsonReader from './processor/JsonReader';
 import JsonWriter from './processor/JsonWriter';
 
-import Url from './Url';
-import Request from './Request';
-import Response from './Response';
+import Url from './entity/Url';
+import Request from './entity/Request';
+import Response from './entity/Response';
 
 let app:App = new App();
 

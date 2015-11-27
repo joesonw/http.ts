@@ -1,10 +1,9 @@
-/// <reference path="../typings/node/node.d.ts"/>
-
-
+/// <reference path="../../typings/node/node.d.ts"/>
 import http = require('http');
 
-import Map from './util/Map';
-import HttpMethod from './HttpMethod';
+
+import Map from '../util/Map';
+import HttpMethod from '../util/HttpMethod';
 import Url from './Url';
 
 /**
@@ -34,7 +33,7 @@ class Request {
 			this.headers.set(key, headers[key]);
 		}
 		this.httpVersion = request.httpVersion;
-		switch (request.method) {
+		switch (request.method.toUpperCase()) {
 			case 'GET':
 				this.httpMethod = HttpMethod.GET;
 				break;
@@ -68,7 +67,7 @@ class Request {
 	 * @return <string>
 	 */
 	getHeader(key:string):string {
-		return this.headers.get(key) || '';
+		return this.headers.get(key.toLowerCase()) || '';
 	}
 	
 	getVersion():string {

@@ -1,6 +1,6 @@
-import Response from '../Response';
-import PostProcessor from '../PostProcessor';
-import ContentType from '../ContentType';
+import Response from '../entity/Response';
+import PostProcessor from '../processor/PostProcessor';
+import ContentType from '../util/ContentType';
 
 class JsonWriter extends PostProcessor {
 	handle(response:Response) {

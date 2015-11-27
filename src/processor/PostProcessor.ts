@@ -1,4 +1,4 @@
-import Response from './Response'
+import Response from '../entity/Response'
 
 abstract class PostProcessor {
 	constructor() {

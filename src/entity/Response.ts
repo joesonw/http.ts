@@ -1,11 +1,9 @@
-import ContentType from './ContentType';
-import HttpStatus from './HttpStatus';
-import Map from './util/Map';
-
-/// <reference path="../typings/node/node.d.ts"/>
-
-
+/// <reference path="../../typings/node/node.d.ts"/>
 import http = require('http');
+
+import ContentType from '../util/ContentType';
+import HttpStatus from '../util/HttpStatus';
+import Map from '../util/Map';
 
 
 class Response {
