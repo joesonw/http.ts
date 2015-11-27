@@ -1,0 +1,17 @@
+{
+  "name": "ts-http",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "node ../TypeScript/built/local/tsc -p . --outDir ./builds",
+    "start": "node --harmony builds/example/ExampleServer.js",
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+  },
+  "devDependencies": {
+  }
+}
