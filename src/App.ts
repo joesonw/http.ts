@@ -55,9 +55,8 @@ class App {
 						.then(() => {
 							response.flush();
 						})
-						.catch(err => {
-							console.error(err.message);
-							console.error(err.stack);
+						.catch((e:Exception) => {
+							self.exceptionHandler(e, response);
 						})
 					found = true;
 				}

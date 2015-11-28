@@ -1,7 +1,6 @@
 import App from './App';
 import HttpMethod from './util/HttpMethod';
 import * as Route from './util/Route';
-import Decorator from './util/Decorator';
 import RouteHandler from './entity/RouteHandler';
 import JsonReader from './processor/JsonReader';
 import JsonWriter from './processor/JsonWriter';
@@ -17,25 +16,21 @@ let app:App = new App();
 
 @Route.Path('/test')
 class IndexHandler extends RouteHandler {
+	public blah:string;
+	
 	
 	@Route.SubPath('/:id')
 	@Route.Method(HttpMethod.POST)
 	@Route.PostFilter(new JsonWriter())
-	async getById(request:Request, response:Response) {
+	async getById(@Route.QueryParam('asd') asd:string, request:Request, response:Response,@Route.PathParam('id') id:string) {
 		console.log(request.getUrl());
 		console.log(request.getBody());
 		console.log(request.getExtra('body'));
+		console.log(id);
+		console.log(asd);
 		response.setHeader('x-test','yes');
 		response.write('Hello world xxx');
 		response.setExtra('body',{message: 'hello'});
-	}
-	
-	@Route.Method(HttpMethod.PUT)
-	@Route.SubPath('')
-	async getIndex(request:Request, response:Response) {
-		console.log(request.getUrl());
-		response.setHeader('x-test','yes');
-		response.write('Hello world xxx');	
 	}
 }
 

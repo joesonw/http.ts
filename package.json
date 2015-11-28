@@ -10,7 +10,8 @@
   },
   "author": "",
   "license": "ISC",
-  "dependencies": {},
-  "devDependencies": {
-  }
+  "dependencies": {
+    "reflect-metadata": "^0.1.2"
+  },
+  "devDependencies": {}
 }
