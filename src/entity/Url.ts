@@ -1,4 +1,6 @@
-
+/**
+ * @module entity
+ */
 import Map from '../util/Map';
 
 const PATH_REGEXP = new RegExp([
@@ -7,7 +9,9 @@ const PATH_REGEXP = new RegExp([
 ].join('|'),'g');
 
 
-
+/**
+ * @class
+ */
 class Url {
 	private path: string;
 	private params: Map<any>;

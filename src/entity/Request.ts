@@ -1,12 +1,16 @@
 /// <reference path="../../typings/node/node.d.ts"/>
 import http = require('http');
 
+/**
+ * @module entity
+ */
 
 import Map from '../util/Map';
 import HttpMethod from '../util/HttpMethod';
 import Url from './Url';
 
 /**
+ * Wrapped request object, used in [RouteHandler]{@link entity~RouteHandler} primarily
  * @class
  */
 
@@ -55,7 +59,7 @@ class Request {
 	
 	/**
 	 * return all headers (empty map if none requested)
-	 * @return Map<string>
+	 * @return {util~Map<string>}
 	 */
 	getHeaders():Map<string> {
 		return new Map<string>(this.headers);
@@ -63,33 +67,59 @@ class Request {
 	
 	/** 
 	 * get a specific header (empty string if not found)
-	 * @param key <string> header name try to get
-	 * @return <string>
+	 * @param {string} key - header name try to get
+	 * @return {string}
 	 */
 	getHeader(key:string):string {
 		return this.headers.get(key.toLowerCase()) || '';
 	}
 	
+	/**
+	 * get request http version
+	 * @return {string}
+	 */
 	getVersion():string {
 		return this.httpVersion;
 	}
 	
+	/**
+	 * get request http method
+	 * @return {util~HttpMethod}
+	 */
 	getMethod():HttpMethod {
 		return this.httpMethod;
 	}	
 	
+	/**
+	 * get request url (params,query,body and path)
+	 * @return {entity~Url}
+	 */
 	getUrl():Url {
 		return this.url;
 	}
 	
+	/**
+	 * get request body
+	 * @return {string}
+	 */
 	getBody():string {
 		return this.body;
 	}
 	
+	/**
+	 * set extra content (primarily used in [PreProcessor]{@link processor.PreProcessor})
+	 * @param {string} key
+	 * @param {entity~Url} value
+	 */
 	setExtra(key:string, value:any) {
 		this.extra.set(key,value);
 	}
 	
+	/**
+	 * get extra content (usually set by [PreProcessor]{@link processor.PreProcessor}])
+	 * @param {string}
+	 * @return {any}
+	 */
 	getExtra(key:string):any {
 		return this.extra.get(key);
 	}
