@@ -10,7 +10,7 @@ class Response {
 	private buffer:string = '';
 	private status:HttpStatus = HttpStatus.OK;
 	private headers:Map<string> = new Map<string>();
-	private contentType:ContentType = ContentType.TEXT;
+	private contentType:ContentType | string = ContentType.TEXT;
 	private flushed:boolean = false;
 	private extra:Map<any> = new Map<any>();
 	private response:http.ServerResponse;
@@ -30,7 +30,7 @@ class Response {
 	getStatus():HttpStatus {
 		return this.status;
 	}
-	setContentType(type:ContentType) {
+	setContentType(type:ContentType | string) {
 		this.contentType = type;
 	}
 	getContentType():ContentType {
@@ -62,6 +62,9 @@ class Response {
 		this.flushed = true;		
 	}
 	private parseContentType():string {
+		if (typeof this.contentType == 'string') {
+			return this.contentType;
+		}
 		switch (this.contentType) {
 			case ContentType.HTML:
 				return 'text/html';
