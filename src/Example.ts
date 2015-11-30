@@ -5,8 +5,10 @@ import RouteHandler from './entity/RouteHandler';
 import JsonReader from './processor/JsonReader';
 import JsonWriter from './processor/JsonWriter';
 import Exception from './exception/Exception';
+import ContentType from './util/ContentType';
 import NotFoundException from './exception/NotFoundException';
 import HttpStatus from './util/HttpStatus';
+//import Serializable, {MapKey } from './entity/Serializable';
 
 import Url from './entity/Url';
 import Request from './entity/Request';
@@ -22,7 +24,8 @@ class IndexHandler extends RouteHandler {
 	@Route.SubPath('/:id')
 	@Route.Method(HttpMethod.POST)
 	@Route.PostFilter(new JsonWriter())
-	async getById(@Route.QueryParam('asd') asd:string, request:Request, response:Response,@Route.PathParam('id') id:string) {
+	@Route.Produce(ContentType.JSON)
+	async getById(@Route.QueryParam('asd') asd:string, request:Request, response:Response,@Route.PathParam('id') id:string):Promise<string> {
 		console.log(request.getUrl());
 		console.log(request.getBody());
 		console.log(request.getExtra('body'));
@@ -31,6 +34,7 @@ class IndexHandler extends RouteHandler {
 		response.setHeader('x-test','yes');
 		response.write('Hello world xxx');
 		response.setExtra('body',{message: 'hello'});
+		return '';
 	}
 }
 
@@ -53,3 +57,18 @@ app.register(index);
 
 app.listen(8080);
 console.log('started on 8080');
+
+
+
+import Filter from './entity/Filter';
+import {Min } from './util/RequestFilter';
+
+class IndexFilter extends Filter {
+    @Min(3)
+    public test: number;
+}
+
+function test<T extends Filter>(constructorFn: new () => T) {
+    let obj: T = new constructorFn();
+    console.log(obj.__metadata);
+}

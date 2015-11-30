@@ -33,7 +33,7 @@ class Response {
 	setContentType(type:ContentType | string) {
 		this.contentType = type;
 	}
-	getContentType():ContentType {
+	getContentType():ContentType | string {
 		return this.contentType;
 	}
 	getHeaders():Map<string> {
@@ -63,7 +63,7 @@ class Response {
 	}
 	private parseContentType():string {
 		if (typeof this.contentType == 'string') {
-			return this.contentType;
+			return String(this.contentType);
 		}
 		switch (this.contentType) {
 			case ContentType.HTML:

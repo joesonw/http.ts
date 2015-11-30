@@ -1,5 +1,8 @@
 /// <reference path="../../typings/node/node.d.ts"/>
+/// <reference path="../../node_modules/reflect-metadata/reflect-metadata.d.ts"/>
+
 import http = require('http');
+import 'reflect-metadata';
 
 /**
  * @module entity
@@ -12,6 +15,7 @@ import Exception from '../exception/Exception';
 import Request from './Request';
 import Response from './Response';
 import Url from './Url';
+import ReflectType from '../util/ReflectType';
 import PreProcessor from '../processor/PreProcessor';
 import PostProcessor from '../processor/PostProcessor';
 
@@ -37,6 +41,7 @@ abstract class RouteHandler {
 	public subHandlerParams: { [fnName:string] : Array<{type:Function, key:string, source:string}>};
 	private preProcessors:Array<PreProcessor> = new Array<PreProcessor>();
 	private postProcessors:Array<PostProcessor> = new Array<PostProcessor>();
+	
 	
 	/**
 	 * INTERNAL usage only 
@@ -89,7 +94,6 @@ abstract class RouteHandler {
 					
 					let types = (this.subHandlerParams || {})[key] || defaultSubHandlerTypes;
 					let params = [];
-					console.log(types);
 					for (let type of types) {
 						if (type.source == 'path') {
 							params.push(request.getUrl().getParam(type.key));

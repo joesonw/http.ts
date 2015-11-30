@@ -1,12 +1,14 @@
 import HttpMethod from './HttpMethod';
+import ContentType from './ContentType';
 import RouteHandler from '../entity/RouteHandler';
 import PreProcessor from '../processor/PreProcessor';
 import PostProcessor from '../processor/PostProcessor';
 import ReflectType from './ReflectType';
 
 
-/// <reference path="../node_modules/reflect-metadata/reflect-metadata.d.ts"/>
+/// <reference path="../../node_modules/reflect-metadata/reflect-metadata.d.ts"/>
 import 'reflect-metadata';
+
 
 export function Method(method:HttpMethod) {
 	return (target:RouteHandler, propertyKey:string, descriptor: TypedPropertyDescriptor<any>) => {
@@ -103,5 +105,11 @@ export function QueryParam(param:string) {
 											{type, key: paramKey, source};
 			i++;
 		}
+	}
+}
+
+export function Produce(type:ContentType) {
+	return (target:RouteHandler, key:string) => {
+		let type = Reflect.getMetadata(ReflectType.RETURN_TYPE, target, key);
 	}
 }

@@ -1,17 +1,30 @@
 {
-  "name": "ts-http",
-  "version": "1.0.0",
-  "description": "",
+  "name": "http.ts",
+  "version": "0.0.2",
+  "description": "http server for typescript",
   "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "node ../TypeScript/built/local/tsc -p . --outDir ./builds",
-    "start": "node --harmony builds/example/ExampleServer.js"
-  },
-  "author": "",
-  "license": "ISC",
   "dependencies": {
     "reflect-metadata": "^0.1.2"
   },
-  "devDependencies": {}
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/joesonw/http.ts.git"
+  },
+  "keywords": [
+    "http",
+    "server",
+    "web",
+    "typescript",
+    "ts"
+  ],
+  "author": "Qiaosen Huang",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/joesonw/http.ts/issues"
+  },
+  "homepage": "https://github.com/joesonw/http.ts#readme"
 }
