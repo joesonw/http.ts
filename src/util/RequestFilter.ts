@@ -8,39 +8,36 @@ import Filter from '../entity/Filter';
 
 
 export function Required() {
-	
+
 }
 
 export function Optional(value:any) {
-	
+
 }
 
 export function Allow(value:any) {
-	
-} 
+
+}
 export function Min(value: number) {
     return (target: Filter, key: string) => {
         target.__metadata = target.__metadata || {};
-        let instance = null;
         let type = Reflect.getMetadata(ReflectType.TYPE, target, key);
-        if (type === Number) {
-            instance = joi.number();
+        let instance = target.__metadata[key] = target.__metadata[key];
+        if (!instance) {
+            if (type === Number) {
+                instance = joi.number();
+            }
+            instance = (<joi.NumberSchema> instance).min(value);
         }
-        target.__metadata[key] = target.__metadata[key] || instance;
-        target.__metadata[key] = target.__metadata[key].min(value);
-       
+        target.__metadata[key] = instance;
     }
 }
 export function Max(value:number) {
-	
+
 }
 export function Length(value:number) {
-	
+
 }
 export function Hex() {
-	
+
 }
-
-
-
-

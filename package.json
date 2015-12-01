@@ -1,9 +1,10 @@
 {
   "name": "http.ts",
   "version": "0.0.2",
-  "description": "http server for typescript",
+  "description": "typescript http framework",
   "main": "index.js",
   "dependencies": {
+    "joi": "^7.0.1",
     "reflect-metadata": "^0.1.2"
   },
   "devDependencies": {},
@@ -15,11 +16,10 @@
     "url": "git+https://github.com/joesonw/http.ts.git"
   },
   "keywords": [
+    "typescript",
     "http",
     "server",
-    "web",
-    "typescript",
-    "ts"
+    "web"
   ],
   "author": "Qiaosen Huang",
   "license": "MIT",

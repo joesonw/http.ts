@@ -4,7 +4,11 @@ import RouteHandler from '../entity/RouteHandler';
 import PreProcessor from '../processor/PreProcessor';
 import PostProcessor from '../processor/PostProcessor';
 import ReflectType from './ReflectType';
+import Filter from '../entity/Filter';
+import FilterPreProcessor from '../processor/FilterPreProcessor';
 
+/// <reference path="../../typings/joi/joi.d.ts"/>
+import * as joi from 'joi';
 
 /// <reference path="../../node_modules/reflect-metadata/reflect-metadata.d.ts"/>
 import 'reflect-metadata';
@@ -17,7 +21,7 @@ export function Method(method:HttpMethod) {
 		if (target.subHandlers[propertyKey]) {
 			path = target.subHandlers[propertyKey].path;
 		}
-		
+
 		target.subHandlers[propertyKey] = target.subHandlers[propertyKey] || {method, path};
 		target.subHandlers[propertyKey].method = method;
 		return descriptor;
@@ -50,7 +54,7 @@ export function PreFilter(processor:PreProcessor) {
 	return (target:RouteHandler, propertyKey:string, descriptor: TypedPropertyDescriptor<any>) => {
 		target.subPreProcessors = target.subPreProcessors || {};
 		target.subPreProcessors[propertyKey] = target.subPreProcessors[propertyKey] || [];
-		target.subPreProcessors[propertyKey].push(processor);		
+		target.subPreProcessors[propertyKey].push(processor);
 		return descriptor;
 	}
 }
@@ -59,7 +63,7 @@ export function PostFilter(processor:PostProcessor) {
 	return (target:RouteHandler, propertyKey:string, descriptor: TypedPropertyDescriptor<any>) => {
 		target.subPostProcessors = target.subPostProcessors || {};
 		target.subPostProcessors[propertyKey] = target.subPostProcessors[propertyKey] || [];
-		target.subPostProcessors[propertyKey].push(processor);		
+		target.subPostProcessors[propertyKey].push(processor);
 		return descriptor;
 	}
 }
@@ -78,7 +82,7 @@ export function PathParam(param:string) {
 				source = 'path';
 				paramKey = param;
 			}
-			target.subHandlerParams[key][i] = t || 
+			target.subHandlerParams[key][i] = t ||
 											{type, key: paramKey, source};
 			i++;
 		}
@@ -94,14 +98,14 @@ export function QueryParam(param:string) {
 		for (let type of types) {
 			let source = null;
 			let paramKey = null;
-			let t = target.subHandlerParams[key][i]
+				let t = target.subHandlerParams[key][i]
 			if (i == index) {
 				source = 'query';
 				paramKey = param;
 				t.source = source;
 				t.key = paramKey;
 			}
-			target.subHandlerParams[key][i] = t || 
+			target.subHandlerParams[key][i] = t ||
 											{type, key: paramKey, source};
 			i++;
 		}
@@ -111,5 +115,15 @@ export function QueryParam(param:string) {
 export function Produce(type:ContentType) {
 	return (target:RouteHandler, key:string) => {
 		let type = Reflect.getMetadata(ReflectType.RETURN_TYPE, target, key);
+	}
+}
+
+export function QueryFilter<T extends Filter>(filter:new () => T) {
+	return (target:RouteHandler, key:string) => {
+		target.subPreProcessors = target.subPreProcessors || {};
+		target.subPreProcessors[key] = target.subPreProcessors[key] || [];
+		let f = new filter();
+		let schema = joi.object().keys(f.__metadata || {});
+		target.subPreProcessors[key].push(new FilterPreProcessor('query',schema));
 	}
 }

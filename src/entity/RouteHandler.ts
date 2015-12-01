@@ -41,22 +41,22 @@ abstract class RouteHandler {
 	public subHandlerParams: { [fnName:string] : Array<{type:Function, key:string, source:string}>};
 	private preProcessors:Array<PreProcessor> = new Array<PreProcessor>();
 	private postProcessors:Array<PostProcessor> = new Array<PostProcessor>();
-	
-	
+
+
 	/**
-	 * INTERNAL usage only 
+	 * INTERNAL usage only
 	 */
 	getMethod():HttpMethod {
 		return HttpMethod.GET;
 	}
-	
+
 	/**
-	 * INTERNAL usage only 
+	 * INTERNAL usage only
 	 */
 	getPath():string {
 		return '';
-	}  
-	
+	}
+
 	/**
 	 * add PreProcessor
 	 * @param processor<processor.PreProcessor>
@@ -64,7 +64,7 @@ abstract class RouteHandler {
 	add(processor:PreProcessor) {
 		this.preProcessors.push(processor);
 	}
-	
+
 	/**
 	 * add PostProcessor
 	 * @param processor<processor.PostProcessor>
@@ -72,7 +72,7 @@ abstract class RouteHandler {
 	addLast(processor:PostProcessor) {
 		this.postProcessors.push(processor);
 	}
-	
+
 	/**
 	 * INTERNAL usage only
 	 */
@@ -91,7 +91,7 @@ abstract class RouteHandler {
 					for (let processor of ((this.subPreProcessors || {})[key] || [])) {
 						await processor.handle(request);
 					}
-					
+
 					let types = (this.subHandlerParams || {})[key] || defaultSubHandlerTypes;
 					let params = [];
 					for (let type of types) {
@@ -110,7 +110,7 @@ abstract class RouteHandler {
 						}
 					}
 					await this[key].apply({},params);
-					
+
 					for (let processor of ((this.subPostProcessors || {}) [key] || [])) {
 						await processor.handle(response);
 					}
@@ -122,14 +122,17 @@ abstract class RouteHandler {
 				}
 			}
 		} catch(e) {
-			throw new Exception('Internal Error');
+			if (e instanceof Exception) {
+				throw e;
+			}
+			throw new Exception('Internal Error', e);
 		}
 		if (!found) {
 			throw new NotFoundException();
 		}
 	}
-	
-	
+
+
 }
 
 export default RouteHandler;
