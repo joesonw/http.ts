@@ -1,7 +1,4 @@
-/**
- * @module entity
- */
-import Map from '../util/Map';
+import {Map } from '../util/Map';
 
 const PATH_REGEXP = new RegExp([
 	'(\\\\.)',
@@ -9,10 +6,7 @@ const PATH_REGEXP = new RegExp([
 ].join('|'),'g');
 
 
-/**
- * @class
- */
-class Url {
+export class Url {
 	private path: string;
 	private params: Map<any>;
 	private query: Map<any>;
@@ -21,25 +15,25 @@ class Url {
 		this.params = params || new Map<any>();
 		this.query = query || new Map<any>();
 	}
-	
+
 	getParams():Map<any> {
 		return new Map(this.params);
 	}
-	
+
 	getParam(key:string):any {
 		return this.params.get(key);
 	}
-	
+
 	getQueries():Map<any> {
 		return new Map(this.query);
 	}
-	
+
 	getQuery(key:string):any {
 		return this.query.get(key);
 	}
-	
+
 	public static match(url:string, pattern:string):boolean {
-		
+
 		let tokens = parse(pattern);
 		let re = tokensToRegExp(tokens,{});
 		let keys = [];
@@ -52,11 +46,11 @@ class Url {
 		let result = re.exec(url);
 		return !!result;
 	}
-	
+
 	public static parse(url:string, pattern:string):Url {
 		let path = url.split('?')[0];
 		let queryString = url.split('?')[1];
-		
+
 		let tokens = parse(pattern);
 		let re = tokensToRegExp(tokens,{});
 		let keys = [];
@@ -82,7 +76,6 @@ class Url {
 	}
 }
 
-export default Url;
 
 function parse (str) {
 	var tokens = []

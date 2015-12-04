@@ -1,12 +1,11 @@
-enum ContentType {
+export enum ContentType {
 	JSON,
 	TEXT,
-	HTML	
+	HTML
 }
 
 const JSON_string = ['application/json'];
 
-export default ContentType;
 export function match(header:string, type:ContentType):boolean {
 	switch (type) {
 		case ContentType.JSON:

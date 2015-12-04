@@ -1,8 +1,6 @@
-/// <reference path="../../typings/joi/joi.d.ts"/>
+/// <reference path="../_typings/joi/joi.d.ts"/>
 import * as joi from 'joi';
 
-abstract class Filter {
+export abstract class Filter {
     public __metadata: { [key: string]: joi.Schema};
 }
-
-export default Filter;

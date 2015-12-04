@@ -1,8 +1,8 @@
-import PreProcessor from '../processor/PreProcessor';
-import Request from '../entity/Request';
-import ContentType, {match } from '../util/ContentType';
+import {PreProcessor } from '../processor/PreProcessor';
+import {Request } from '../entity/Request';
+import {ContentType, match } from '../util/ContentType';
 
-class JsonReader extends PreProcessor {
+export class JsonReader extends PreProcessor {
 	handle(request:Request) {
 		let str = request.getBody();
 		if (match(request.getHeader('Content-Type'),ContentType.JSON)) {
@@ -15,5 +15,3 @@ class JsonReader extends PreProcessor {
 		}
 	}
 }
-
-export default JsonReader;

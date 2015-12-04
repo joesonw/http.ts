@@ -1,8 +1,8 @@
-import Response from '../entity/Response';
-import PostProcessor from '../processor/PostProcessor';
-import ContentType from '../util/ContentType';
+import {Response } from '../entity/Response';
+import {PostProcessor } from '../processor/PostProcessor';
+import {ContentType } from '../util/ContentType';
 
-class JsonWriter extends PostProcessor {
+export class JsonWriter extends PostProcessor {
 	handle(response:Response) {
 		let body = response.getExtra('body');
 		if (body) {
@@ -10,10 +10,8 @@ class JsonWriter extends PostProcessor {
 				response.write(JSON.stringify(body));
 				response.setContentType(ContentType.JSON);
 			} catch (e) {
-				
+
 			}
 		}
 	}
 }
-
-export default JsonWriter;

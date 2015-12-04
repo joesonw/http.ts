@@ -1,12 +1,12 @@
-/// <reference path="../../typings/node/node.d.ts"/>
+/// <reference path="../_typings/node/node.d.ts"/>
 import http = require('http');
 
-import ContentType from '../util/ContentType';
-import HttpStatus from '../util/HttpStatus';
-import Map from '../util/Map';
+import {ContentType } from '../util/ContentType';
+import {HttpStatus } from '../util/HttpStatus';
+import {Map } from '../util/Map';
 
 
-class Response {
+export class Response {
 	private buffer:string = '';
 	private status:HttpStatus = HttpStatus.OK;
 	private headers:Map<string> = new Map<string>();
@@ -14,7 +14,7 @@ class Response {
 	private flushed:boolean = false;
 	private extra:Map<any> = new Map<any>();
 	private response:http.ServerResponse;
-	
+
 	constructor(response:http.ServerResponse) {
 		this.response = response;
 	}
@@ -58,8 +58,8 @@ class Response {
 		}
 		this.response.writeHead(this.status, headers);
 		this.response.end(this.buffer);
-		
-		this.flushed = true;		
+
+		this.flushed = true;
 	}
 	private parseContentType():string {
 		if (typeof this.contentType == 'string') {
@@ -82,7 +82,5 @@ class Response {
 	getExtra(key:string):any {
 		return this.extra.get(key);
 	}
-	
-}
 
-export default Response;
+}

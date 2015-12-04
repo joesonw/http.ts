@@ -2,7 +2,6 @@
 	"compilerOptions": {
 		"module": "commonjs",
 		"sourceMap": true,
-		"outDir": "dist",
 		"target": "ES6",
 		"experimentalDecorators": true,
 		"emitDecoratorMetadata": true,
@@ -10,6 +9,6 @@
 	},
 	"compileOnSave": false,
 	"files": [
-		"src/index.ts"
+		"Example.ts"
 	]
 }

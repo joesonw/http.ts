@@ -1,11 +1,11 @@
-import PreProcessor from '../processor/PreProcessor';
-import Request from '../entity/Request';
-import FilterException from '../exception/FilterException';
+/// <reference path="../_typings/joi/joi.d.ts"/>
 
-/// <reference path="../../typings/joi/joi.d.ts"/>
+import {PreProcessor } from '../processor/PreProcessor';
+import {Request } from '../entity/Request';
+import {FilterException } from '../exception/FilterException';
 import * as joi from 'joi';
 
-class FilterPreProcessor extends PreProcessor {
+export class FilterPreProcessor extends PreProcessor {
     private type:string = '';
     private schema:joi.Schema = null;
     constructor(type:string, schema:joi.Schema) {
@@ -28,5 +28,3 @@ class FilterPreProcessor extends PreProcessor {
         }
     }
 }
-
-export default FilterPreProcessor;

@@ -2,7 +2,7 @@
   "version": "v4",
   "repo": "borisyankov/DefinitelyTyped",
   "ref": "master",
-  "path": "typings",
-  "bundle": "typings/tsd.d.ts",
+  "path": "src/_typings",
+  "bundle": "src/_typings/tsd.d.ts",
   "installed": {}
 }

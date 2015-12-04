@@ -1,11 +1,11 @@
-import HttpMethod from './HttpMethod';
-import ContentType from './ContentType';
-import RouteHandler from '../entity/RouteHandler';
-import PreProcessor from '../processor/PreProcessor';
-import PostProcessor from '../processor/PostProcessor';
-import ReflectType from './ReflectType';
-import Filter from '../entity/Filter';
-import FilterPreProcessor from '../processor/FilterPreProcessor';
+import {HttpMethod } from '../util';
+import {ContentType } from '../util';
+import {RouteHandler } from '../entity/RouteHandler';
+import {PreProcessor } from '../processor/PreProcessor';
+import {PostProcessor } from '../processor/PostProcessor';
+import {ReflectType } from './ReflectType';
+import {Filter } from '../entity/Filter';
+import {FilterPreProcessor } from '../processor/FilterPreProcessor';
 
 /// <reference path="../../typings/joi/joi.d.ts"/>
 import * as joi from 'joi';

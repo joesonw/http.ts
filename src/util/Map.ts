@@ -1,12 +1,12 @@
 
-class Map<T> {
+export class Map<T> {
 	private data:{[k:string] : T};
 	constructor(source?:Map<T>) {
 		this.data = {};
 		if (source) {
 			for (let entry of source.entrySet()) {
 				this.data[entry.key] = entry.value;
-			}	
+			}
 		}
 	}
 	set(key:string, value:T) {
@@ -23,14 +23,14 @@ class Map<T> {
 	has(key:string) {
 		return (key in this.data);
 	}
-	entrySet():Array<Entry<T>> {
+	entrySet():Array<Map.Entry<T>> {
 		let ret = [];
 		for (let key in this.data) {
 			ret.push({key: key, value: this.data[key]});
 		}
 		return ret;
 	}
-	iterator():Iterator<T> {
+	iterator():Map.Iterator<T> {
 		let keys = Object.keys(this.data);
 		if (keys.length == 0) {
 			return null;
@@ -54,14 +54,14 @@ class Map<T> {
 	}
 }
 
-export default Map;
-
-export interface Entry<T> {
-	key:string;
-	value:T;
-}
-export interface Iterator<T> {
-	key:string;
-	value:T;
-	next: Iterator<T>;
+export namespace Map {
+	export interface Entry<T> {
+		key:string;
+		value:T;
+	}
+	export interface Iterator<T> {
+		key:string;
+		value:T;
+		next: Iterator<T>;
+	}
 }

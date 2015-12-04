@@ -1,9 +1,10 @@
-import ReflectType from '../util/ReflectType';
 /// <reference path="../../node_modules/reflect-metadata/reflect-metadata.d.ts"/>
+/// <reference path="../_typings/joi/joi.d.ts"/>
 import 'reflect-metadata';
-/// <reference path="../../typings/joi/joi.d.ts"/>
 import * as joi from 'joi';
-import Filter from '../entity/Filter';
+
+import {Filter } from '../entity/Filter';
+import {ReflectType } from '../util/ReflectType';
 
 
 

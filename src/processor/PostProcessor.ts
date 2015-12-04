@@ -1,9 +1,7 @@
-import Response from '../entity/Response'
+import {Response } from '../entity/Response'
 
-abstract class PostProcessor {
+export abstract class PostProcessor {
 	constructor() {
 	}
 	abstract handle(response:Response);
 }
-
-export default PostProcessor;
