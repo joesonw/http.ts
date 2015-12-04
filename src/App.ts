@@ -17,10 +17,14 @@ export class App {
 	private exceptionHandler:(exception:Exception, response:Response) => void;
 
 	constructor() {
-			this.server = http.createServer(this.serverHandler.bind(this));
+		this.server = http.createServer(this.serverHandler.bind(this));
 		this.exceptionHandler = this.defaultExceptionHandler;
 	}
 
+	/**
+	 * @param req raw http request
+	 * @param res raw http response
+	 */
 	private serverHandler(req:http.IncomingMessage,res:http.ServerResponse) {
 		let buffer = '';
 		let self = this;
