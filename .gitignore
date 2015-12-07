@@ -1,5 +1,6 @@
 dist/
 node_modules/
+builds/
 env/
 typings/
 npm-debug.log

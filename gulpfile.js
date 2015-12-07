@@ -3,7 +3,7 @@ var glob = require('glob');
 var fs = require('fs');
 var path = require('path');
 
-function buildIndex(p, name, directory) {
+function buildIndex(p, name, directory, ns) {
 
 	var files = fs.readdirSync(p);
 	var modules = [];
@@ -20,7 +20,7 @@ function buildIndex(p, name, directory) {
 			continue;
 		}
 		if (fs.statSync(path.join(p, file)).isDirectory()) {
-			buildIndex(path.join(p, file), p + '/' + file + '.ts', file);
+			buildIndex(path.join(p, file), p + '/' + file + '.ts', file, ns + '.' + file);
 			directories.push(path.basename(file, ext));
 		} else {
 			modules.push(path.basename(file, ext));
@@ -28,23 +28,25 @@ function buildIndex(p, name, directory) {
 	}
 	var output = `/*  ${name} */\n\n`;
 
-	for (var index of modules) {
-		output += `export * from './${directory}/${index}';\n`;
-	}
-	for (var index of directories) {
-		output += `import * as ${index} from './${index}';\n`;
-	}
-	for (var index of directories) {
-		output += `export {${index}};\n`;
-	}
+	//output += `export namespace ${ns} {\n`;
 
+	for (var index of modules) {
+		output += `\texport * from '.${directory !== '' ? '/' :''}${directory}/${index}';\n`;
+	}
+	for (var index of directories) {
+		output += `\timport * as ${index} from './${index}';\n`;
+	}
+	for (var index of directories) {
+		output += `\texport {${index}};\n`;
+	}
+	//output += '}';
 	output += '\n\n';
 
 	fs.writeFileSync(name , output);
 }
 
 gulp.task('build:index', ['clean:index'], function() {
-	buildIndex('./src', 'src/index.ts', '');
+	buildIndex('./src', 'src/index.ts', '','httpts');
 });
 
 

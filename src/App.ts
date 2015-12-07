@@ -21,10 +21,6 @@ export class App {
 		this.exceptionHandler = this.defaultExceptionHandler;
 	}
 
-	/**
-	 * @param req raw http request
-	 * @param res raw http response
-	 */
 	private serverHandler(req:http.IncomingMessage,res:http.ServerResponse) {
 		let buffer = '';
 		let self = this;
