@@ -1,7 +1,9 @@
-import {Request } from '../entity/Request';
+import Request from '../entity/Request';
 
-export abstract class PreProcessor {
+abstract class PreProcessor {
 	constructor() {
 	}
 	abstract handle(request:Request);
 }
+
+export default PreProcessor;

@@ -1,12 +1,12 @@
-/// <reference path="../_typings/node/node.d.ts"/>
-import http = require('http');
+/// <reference path="../../../shared.ts/typings/node/node.d.ts"/>
+import * as http from 'http';
 
-import {ContentType } from '../util/ContentType';
-import {HttpStatus } from '../util/HttpStatus';
-import {Map } from '../util/Map';
+import ContentType from '../util/ContentType';
+import HttpStatus from '../util/HttpStatus';
+import Map from '../util/Map';
 
 
-export class Response {
+export default class Response {
 	private buffer:string = '';
 	private status:HttpStatus = HttpStatus.OK;
 	private headers:Map<string> = new Map<string>();

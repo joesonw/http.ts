@@ -1,13 +1,12 @@
-/// <reference path="../_typings/node/node.d.ts"/>
-import http = require('http');
+/// <reference path="../../../shared.ts/typings/node/node.d.ts"/>
+import * as http from 'http';
 
-import {Map } from '../util/Map';
-import {HttpMethod } from '../util/HttpMethod';
-import {Url } from './Url';
+import Map from '../util/Map';
+import HttpMethod from '../util/HttpMethod';
+import Url from './Url';
 
-export class Request {
+class Request {
 	private request:http.IncomingMessage;
-
 	private extra:Map<any> = new Map<string>();
 	private headers:Map<string> = new Map<string>();
 	private httpVersion:string;
@@ -48,14 +47,24 @@ export class Request {
 
 	}
 
+	/**
+	 * Get all HTTP headers
+	 */
 	getHeaders():Map<string> {
 		return new Map<string>(this.headers);
 	}
 
+	/**
+	 * Get HTTP header by key
+	 * @param header name to get
+	 */
 	getHeader(key:string):string {
 		return this.headers.get(key.toLowerCase()) || '';
 	}
 
+	/**
+ // 	 * Get http version
+	 */
 	getVersion():string {
 		return this.httpVersion;
 	}
@@ -81,3 +90,5 @@ export class Request {
 	}
 
 }
+
+export default Request;

@@ -1,18 +1,18 @@
 /// <reference path="../../node_modules/reflect-metadata/reflect-metadata.d.ts"/>
-/// <reference path="../_typings/node/node.d.ts"/>
+/// <reference path="../../../shared.ts/typings/node/node.d.ts"/>
 
-import http = require('http');
+import * as http from 'http';
 import 'reflect-metadata';
 
-import {HttpMethod } from '../util/HttpMethod';
-import {NotFoundException } from '../exception/NotFoundException';
-import {Exception } from '../exception/Exception';
-import {Request } from '../entity/Request';
-import {Response } from './Response';
-import {Url } from './Url';
-import {ReflectType } from '../util/ReflectType';
-import {PreProcessor } from '../processor/PreProcessor';
-import {PostProcessor } from '../processor/PostProcessor';
+import HttpMethod from '../util/HttpMethod';
+import NotFoundException from '../exception/NotFoundException';
+import Exception from '../exception/Exception';
+import Request from '../entity/Request';
+import Response from './Response';
+import Url from './Url';
+import ReflectType from '../util/ReflectType';
+import PreProcessor from '../processor/PreProcessor';
+import PostProcessor from '../processor/PostProcessor';
 
 
 const defaultSubHandlerTypes = [{
@@ -25,7 +25,7 @@ const defaultSubHandlerTypes = [{
 	source: null
 }];
 
-export abstract class RouteHandler {
+abstract class RouteHandler {
 
 	public subHandlers:{ [fnName:string] : {method:HttpMethod, path:string} };
 	public subPreProcessors:{ [fnName:string] : Array<PreProcessor>};
@@ -83,7 +83,7 @@ export abstract class RouteHandler {
 							}
 						}
 					}
-					await this[key].apply({},params);
+					await this[key](...params);
 
 					for (let processor of ((this.subPostProcessors || {}) [key] || [])) {
 						await processor.handle(response);
@@ -106,3 +106,5 @@ export abstract class RouteHandler {
 		}
 	}
 }
+
+export default RouteHandler;

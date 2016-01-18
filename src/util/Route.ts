@@ -1,19 +1,15 @@
-import {HttpMethod } from '../util/HttpMethod';
-import {ContentType } from '../util/ContentType';
-import {RouteHandler } from '../entity/RouteHandler';
-import {PreProcessor } from '../processor/PreProcessor';
-import {PostProcessor } from '../processor/PostProcessor';
-import {ReflectType } from './ReflectType';
-import {Filter } from '../entity/Filter';
-import {FilterPreProcessor } from '../processor/FilterPreProcessor';
+import HttpMethod from '../util/HttpMethod';
+import ContentType from '../util/ContentType';
+import RouteHandler from '../entity/RouteHandler';
+import PreProcessor from '../processor/PreProcessor';
+import PostProcessor from '../processor/PostProcessor';
+import ReflectType from './ReflectType';
 
-/// <reference path="../_typings/joi/joi.d.ts"/>
-import * as joi from 'joi';
 
 /// <reference path="../../node_modules/reflect-metadata/reflect-metadata.d.ts"/>
 import 'reflect-metadata';
 
-export namespace Route {
+namespace Route {
 	export function Method(method:HttpMethod) {
 		return (target:RouteHandler, propertyKey:string, descriptor: TypedPropertyDescriptor<any>) => {
 			target.subHandlers = target.subHandlers || {};
@@ -118,13 +114,6 @@ export namespace Route {
 		}
 	}
 
-	export function QueryFilter<T extends Filter>(filter:new () => T) {
-		return (target:RouteHandler, key:string) => {
-			target.subPreProcessors = target.subPreProcessors || {};
-			target.subPreProcessors[key] = target.subPreProcessors[key] || [];
-			let f = new filter();
-			let schema = joi.object().keys(f.__metadata || {});
-			target.subPreProcessors[key].push(new FilterPreProcessor('query',schema));
-		}
-	}
 }
+
+export default Route;

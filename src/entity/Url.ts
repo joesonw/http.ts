@@ -1,4 +1,4 @@
-import {Map } from '../util/Map';
+import Map from '../util/Map';
 
 const PATH_REGEXP = new RegExp([
 	'(\\\\.)',
@@ -6,7 +6,7 @@ const PATH_REGEXP = new RegExp([
 ].join('|'),'g');
 
 
-export class Url {
+export default class Url {
 	private path: string;
 	private params: Map<any>;
 	private query: Map<any>;

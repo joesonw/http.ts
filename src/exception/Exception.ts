@@ -1,6 +1,7 @@
-/// <reference path="../_typings/node/node.d.ts"/>
-import {Map } from '../util/Map';
-export class Exception {
+/// <reference path="../../../shared.ts/typings/node/node.d.ts"/>
+import Map from '../util/Map';
+
+class Exception {
 	protected stack:string;
 	protected message:string
 	protected extra:Map<any> = new Map<any>();
@@ -25,3 +26,5 @@ export class Exception {
 		return this.extra.get(key);
 	}
 }
+
+export default Exception;

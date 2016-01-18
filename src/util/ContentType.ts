@@ -1,4 +1,4 @@
-export enum ContentType {
+enum ContentType {
 	JSON,
 	TEXT,
 	HTML
@@ -6,10 +6,14 @@ export enum ContentType {
 
 const JSON_string = ['application/json'];
 
-export function match(header:string, type:ContentType):boolean {
-	switch (type) {
-		case ContentType.JSON:
-			if (JSON_string.indexOf(header) !== -1) return true;
+namespace ContentType {
+	export function match(header:string, type:ContentType):boolean {
+		switch (type) {
+			case ContentType.JSON:
+				if (JSON_string.indexOf(header) !== -1) return true;
+		}
+		return false;
 	}
-	return false;
 }
+
+export default ContentType;

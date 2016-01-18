@@ -1,5 +1,5 @@
 
-export class Map<T> {
+class Map<T> {
 	private data:{[k:string] : T};
 	constructor(source?:Map<T>) {
 		this.data = {};
@@ -54,7 +54,7 @@ export class Map<T> {
 	}
 }
 
-export namespace Map {
+namespace Map {
 	export interface Entry<T> {
 		key:string;
 		value:T;
@@ -65,3 +65,5 @@ export namespace Map {
 		next: Iterator<T>;
 	}
 }
+
+export default Map;

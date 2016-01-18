@@ -2,8 +2,6 @@ import * as httpts from './src/index';
 
 let app:httpts.App = new httpts.App();
 
-app.listen(8080);
-
 class TestFilter extends httpts.entity.Filter  {
 	@httpts.util.RequestFilter.Min(10)
 	public test:number;
